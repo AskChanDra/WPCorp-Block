@@ -59,3 +59,18 @@ function wpcorp_block_block_init() {
 	) );
 }
 add_action( 'init', 'wpcorp_block_block_init' );
+
+/**
+ * Create WE Blocks Categories
+ */
+add_filter( 'block_categories', function( $categories, $post ) {
+	return array_merge(
+		$categories,
+		array(
+			array(
+				'slug' => 'wpcorp',
+				'title' => __( 'WP Corp Blocks', 'wpcorp-block' ),
+			),
+		)
+	);
+}, 10, 2 );

@@ -24,67 +24,16 @@ import './style.scss';
 /**
  * Internal dependencies
  */
-import { BasicEdit, LogoGridEdit } from './edit';
-import { BasicSave, LogoGridSave } from './save';
+import {  LogoGridEdit } from './edit';
+import {  LogoGridSave } from './save';
 
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
- */
-registerBlockType( 'create-block/wpcorp-block', {
-	/**
-	 * This is the display title for your block, which can be translated with `i18n` functions.
-	 * The block inserter will show this name.
-	 */
-	title: __( 'Wpcorp Block', 'wpcorp-block' ),
-
-	/**
-	 * This is a short description for your block, can be translated with `i18n` functions.
-	 * It will be shown in the Block Tab in the Settings Sidebar.
-	 */
-	description: __(
-		'Example b lock written with ESNext standard and JSX support –build step required.',
-		'wpcorp-block'
-	),
-
-	/**
-	 * Blocks are grouped into categories to help users browse and discover them.
-	 * The categories provided by core are `common`, `embed`, `formatting`, `layout` and `widgets`.
-	 */
-	category: 'widgets',
-
-	/**
-	 * An icon property should be specified to make it easier to identify a block.
-	 * These can be any of WordPress’ Dashicons, or a custom svg element.
-	 */
-	icon: 'smiley',
-
-	/**
-	 * Optional block extended support features.
-	 */
-	supports: {
-		// Removes support for an HTML mode.
-		html: false,
-	},
-
-	/**
-	 * @see ./edit.js
-	 */
-	edit: BasicEdit,
-
-	/**
-	 * @see ./save.js
-	 */
-	save: BasicSave,
-} );
 
 /**
  * Register Logo Grid Block
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'create-block/logo-grid', {
+registerBlockType( 'create-block/wpcorp-block', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
@@ -105,7 +54,7 @@ registerBlockType( 'create-block/logo-grid', {
 	 * The categories provided by core are `common`, `embed`, `formatting`, `layout` and `widgets`.
 	 * Custom Cateogry : `wpcorp`
 	 */
-	category: 'wpcorp',
+	category: 'media',
 
 	/**
 	 * An icon property should be specified to make it easier to identify a block.
@@ -118,7 +67,34 @@ registerBlockType( 'create-block/logo-grid', {
 	 */
 	supports: {
 		// Removes support for an HTML mode.
-		html: false,
+		html: true,
+	},
+
+	/**
+	 * Attributes
+	 */
+	attributes: {
+		id: {
+			source: "attribute",
+			selector: ".grid-widget",
+			attribute: "id"
+		},
+		logos : {
+			source: "query",
+			default: [],
+			selector: ".cell-content",
+			query: {
+				image: {
+					source: "attribute",
+					selector: "img",
+					attribute: "src"
+				}
+			}
+		},
+		logo_count: {
+			type: 'string',
+			default: '4',
+		},
 	},
 
 	/**
