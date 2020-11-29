@@ -10,4 +10,4 @@
   
 ## Screenshots 
 
-<img src="assets/Logo-grid.gif" width="350" >
+<img src="assets/Logo-grid.gif" width="450" >
